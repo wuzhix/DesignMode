@@ -30,8 +30,8 @@ class WinBorder: public Border {};
 class AbstractFactory 
 {
 public:
-    virtual Button* CreateButton() =0;
-    virtual Border* CreateBorder() =0;
+    virtual Button* CreateButton() = 0;
+    virtual Border* CreateBorder() = 0;
 };
 
 class MacFactory: public AbstractFactory 
@@ -41,7 +41,8 @@ public:
     MacBorder* CreateBorder() { return new MacBorder; }
 };
 
-class WinFactory: public AbstractFactory {
+class WinFactory: public AbstractFactory 
+{
 public:
     WinButton* CreateButton() { return new WinButton; }
     WinBorder* CreateBorder() { return new WinBorder; }

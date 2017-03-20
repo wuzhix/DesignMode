@@ -1,6 +1,7 @@
 #include<iostream>
 #include "AbstractFactory.h"
 #include "Builder.h"
+#include "FactoryMethod.h"
 
 int main()
 {
@@ -34,6 +35,13 @@ int main()
     delete director;
     delete b1;
     delete b2;
+    
+    RadioFactory* pMac = new MacRadioFactory();
+    pMac->CreateRadio();
+    RadioFactory* pWin = new WinRadioFactory();
+    pWin->CreateRadio();
+    delete pMac;
+    delete pWin;
     
     system("pause");
     return 0;
