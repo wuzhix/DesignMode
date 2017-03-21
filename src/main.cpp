@@ -2,6 +2,7 @@
 #include "AbstractFactory.h"
 #include "Builder.h"
 #include "FactoryMethod.h"
+#include "Prototype.h"
 
 int main()
 {
@@ -20,8 +21,11 @@ int main()
     Button* button = fac->CreateButton();
     Border* border = fac->CreateBorder();
     delete fac;
+    fac = NULL;
     delete button;
+    button = NULL;
     delete border;
+    border = NULL;
     
     Director* director = new Director();
     Builder* b1 = new ConcreteBuilder1();
@@ -33,16 +37,28 @@ int main()
     p1->output();
     p2->output();
     delete director;
+    director = NULL;
     delete b1;
+    b1 = NULL;
     delete b2;
+    b2 = NULL;
     
     RadioFactory* pMac = new MacRadioFactory();
     pMac->CreateRadio();
     RadioFactory* pWin = new WinRadioFactory();
     pWin->CreateRadio();
     delete pMac;
+    pMac = NULL;
     delete pWin;
+    pWin = NULL;
     
+    Prototype* pTypeA = new ConcretePrototype();
+    Prototype* pTypeB = pTypeA->clone();
+    delete pTypeA;
+    pTypeA = NULL;
+    delete pTypeB;
+    pTypeB = NULL;
+            
     system("pause");
     return 0;
 }
