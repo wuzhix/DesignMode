@@ -3,6 +3,7 @@
 #include "Builder.h"
 #include "FactoryMethod.h"
 #include "Prototype.h"
+#include "Singleton.h"
 
 int main()
 {
@@ -58,6 +59,8 @@ int main()
     pTypeA = NULL;
     delete pTypeB;
     pTypeB = NULL;
+    
+    Singleton* pInstance = Singleton::Instance();
             
     system("pause");
     return 0;
