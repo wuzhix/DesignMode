@@ -4,3 +4,4 @@
 * [生成器模式](/src/Builder.h)
 * [原型模式](/src/Prototype.h)
 * [单例模式](/src/Singleton.h)
+* [适配器模式](/src/Adapter.h)

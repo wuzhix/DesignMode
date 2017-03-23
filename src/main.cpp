@@ -4,6 +4,7 @@
 #include "FactoryMethod.h"
 #include "Prototype.h"
 #include "Singleton.h"
+#include "Adapter.h"
 
 int main()
 {
@@ -61,6 +62,18 @@ int main()
     pTypeB = NULL;
     
     Singleton* pInstance = Singleton::Instance();
+    Singleton* pInstance1 = Singleton::Instance();
+    cout<<"pInstance : "<<pInstance<<endl;
+    cout<<"pInstance1 : "<<pInstance1<<endl;
+    
+    Adapter* pAdapter = new Adapter();
+    pAdapter->Request();
+    Adapter1* pAdapter1 = new Adapter1();
+    pAdapter1->Request();
+    delete pAdapter;
+    pAdapter = NULL;
+    delete pAdapter1;
+    pAdapter1 = NULL;
             
     system("pause");
     return 0;
