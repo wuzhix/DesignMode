@@ -6,6 +6,7 @@
 #include "Singleton.h"
 #include "Adapter.h"
 #include "Bridge.h"
+#include "Composite.h"
 
 int main()
 {
@@ -97,6 +98,27 @@ int main()
     pShape1 = NULL;
     delete pShape2;
     pShape2 = NULL;
+    
+    //组合模式
+    Component* pLeaf1 = new Leaf();
+    Component* pLeaf2 = new Leaf();
+    Component* pComposite = new Composite();
+    pComposite->Operation();
+    pComposite->Add(pLeaf1);
+    pComposite->Operation();
+    pComposite->Add(pLeaf2); 
+    pComposite->Operation();
+    pComposite->Remove(pLeaf1); 
+    pComposite->Operation();
+    Component* pLeaf = pComposite->GetChild(0);
+    pLeaf->Operation();
+    delete pLeaf1;
+    pLeaf1 = NULL;
+    delete pLeaf2;
+    pLeaf2 = NULL;
+    delete pComposite;
+    pComposite = NULL;
+    
     system("pause");
     return 0;
 }
