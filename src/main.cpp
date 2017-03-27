@@ -7,14 +7,15 @@
 #include "Adapter.h"
 #include "Bridge.h"
 #include "Composite.h"
+#include "Decorator.h"
 
 int main()
 {
-    //抽象工厂模式 
+    //抽象工厂模式
     AbstractFactory* fac;
     enum OS {MAC, WIN};
     int style = MAC;
-    switch (style) 
+    switch (style)
     {
     case MAC:
         fac = new MacFactory;
@@ -31,8 +32,8 @@ int main()
     button = NULL;
     delete border;
     border = NULL;
-    
-    //生成器模式 
+
+    //生成器模式
     Director* director = new Director();
     Builder* b1 = new ConcreteBuilder1();
     Builder* b2 = new ConcreteBuilder2();
@@ -48,8 +49,8 @@ int main()
     b1 = NULL;
     delete b2;
     b2 = NULL;
-    
-    //工厂方法模式 
+
+    //工厂方法模式
     RadioFactory* pMac = new MacRadioFactory();
     pMac->CreateRadio();
     RadioFactory* pWin = new WinRadioFactory();
@@ -58,22 +59,22 @@ int main()
     pMac = NULL;
     delete pWin;
     pWin = NULL;
-    
-    //原型模式 
+
+    //原型模式
     Prototype* pTypeA = new ConcretePrototype();
     Prototype* pTypeB = pTypeA->clone();
     delete pTypeA;
     pTypeA = NULL;
     delete pTypeB;
     pTypeB = NULL;
-    
-    //单例模式 
+
+    //单例模式
     Singleton* pInstance = Singleton::Instance();
     Singleton* pInstance1 = Singleton::Instance();
     cout<<"pInstance : "<<pInstance<<endl;
     cout<<"pInstance1 : "<<pInstance1<<endl;
-    
-    //适配器模式 
+
+    //适配器模式
     Adapter* pAdapter = new Adapter();
     pAdapter->Request();
     Adapter1* pAdapter1 = new Adapter1();
@@ -82,7 +83,7 @@ int main()
     pAdapter = NULL;
     delete pAdapter1;
     pAdapter1 = NULL;
-    
+
     //桥接模式
     DrawingAPI* pDraw1 = new DrawingCircle();
     DrawingAPI* pDraw2 = new DrawingTriangle();
@@ -98,7 +99,7 @@ int main()
     pShape1 = NULL;
     delete pShape2;
     pShape2 = NULL;
-    
+
     //组合模式
     Component* pLeaf1 = new Leaf();
     Component* pLeaf2 = new Leaf();
@@ -106,9 +107,9 @@ int main()
     pComposite->Operation();
     pComposite->Add(pLeaf1);
     pComposite->Operation();
-    pComposite->Add(pLeaf2); 
+    pComposite->Add(pLeaf2);
     pComposite->Operation();
-    pComposite->Remove(pLeaf1); 
+    pComposite->Remove(pLeaf1);
     pComposite->Operation();
     Component* pLeaf = pComposite->GetChild(0);
     pLeaf->Operation();
@@ -118,7 +119,13 @@ int main()
     pLeaf2 = NULL;
     delete pComposite;
     pComposite = NULL;
-    
+
+    //装饰模式
+    Widget* aWidget = new BorderDecorator(new BorderDecorator(new ScrollDecorator(new TextField(80, 24))));
+    aWidget->draw();
+    delete aWidget;
+    aWidget = NULL;
+
     system("pause");
     return 0;
 }
