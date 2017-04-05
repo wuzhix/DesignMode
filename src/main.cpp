@@ -8,6 +8,7 @@
 #include "Bridge.h"
 #include "Composite.h"
 #include "Decorator.h"
+#include "Facade.h"
 
 int main()
 {
@@ -125,6 +126,12 @@ int main()
     aWidget->draw();
     delete aWidget;
     aWidget = NULL;
+
+    //外观模式
+    CPU* pCpu = new CPU();
+    Memory* pMemory = new Memory();
+    HardDrive* pHardDrive = new HardDrive();
+    Computer* pComputer = new Computer(pCpu, pMemory, pHardDrive);
 
     system("pause");
     return 0;

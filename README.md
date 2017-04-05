@@ -8,3 +8,4 @@
 * [桥接模式](/src/Bridge.h)
 * [组合模式](/src/Composite.h)
 * [装饰模式](/src/Decorator.h)
+* [外观模式](/src/Facade.h)
