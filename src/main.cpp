@@ -9,6 +9,7 @@
 #include "Composite.h"
 #include "Decorator.h"
 #include "Facade.h"
+#include "Flyweight.h"
 
 int main()
 {
@@ -132,6 +133,26 @@ int main()
     Memory* pMemory = new Memory();
     HardDrive* pHardDrive = new HardDrive();
     Computer* pComputer = new Computer(pCpu, pMemory, pHardDrive);
+    delete pCpu;
+    pCpu = NULL;
+    delete pMemory;
+    pMemory = NULL;
+    delete pHardDrive;
+    pHardDrive = NULL;
+    delete pComputer;
+    pComputer = NULL;
+
+    //享元模式
+    //外部状态extrinsicState
+    string extrinsicState = "ext";
+    //工厂对象
+    FlyweightFactory* fc = new FlyweightFactory();
+    //向工厂申请一个Flyweight对象，且该对象的内部状态值为“hello”
+    Flyweight* fly = fc->GetFlyweight("hello");
+    Flyweight* fly1 = fc->GetFlyweight("hello");
+    //应用外部状态
+    fly->Operation(extrinsicState);
+    fc->GetFlyweightCount();
 
     system("pause");
     return 0;
