@@ -10,3 +10,4 @@
 * [装饰模式](/src/Decorator.h)
 * [外观模式](/src/Facade.h)
 * [享元模式](/src/Flyweight.h)
+* [代理模式](/src/Proxy.h)

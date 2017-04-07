@@ -10,6 +10,7 @@
 #include "Decorator.h"
 #include "Facade.h"
 #include "Flyweight.h"
+#include "Proxy.h"
 
 int main()
 {
@@ -145,6 +146,7 @@ int main()
     //享元模式
     //外部状态extrinsicState
     string extrinsicState = "ext";
+    string extrinsicState1 = "ext1";
     //工厂对象
     FlyweightFactory* fc = new FlyweightFactory();
     //向工厂申请一个Flyweight对象，且该对象的内部状态值为“hello”
@@ -152,7 +154,14 @@ int main()
     Flyweight* fly1 = fc->GetFlyweight("hello");
     //应用外部状态
     fly->Operation(extrinsicState);
+    fly1->Operation(extrinsicState1);
     fc->GetFlyweightCount();
+
+    //代理模式
+    CSubject *pSubject = new CProxy();
+	pSubject->Request();
+	delete pSubject;
+	pSubject = NULL;
 
     system("pause");
     return 0;
