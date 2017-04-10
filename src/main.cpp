@@ -12,6 +12,9 @@
 #include "Flyweight.h"
 #include "Proxy.h"
 #include "ChainOfResponsibility.h"
+#include "Command.h"
+
+#define SAFE_DELETE(p) if (p) {delete p;p = NULL;}
 
 int main()
 {
@@ -30,12 +33,9 @@ int main()
     }
     Button* button = fac->CreateButton();
     Border* border = fac->CreateBorder();
-    delete fac;
-    fac = NULL;
-    delete button;
-    button = NULL;
-    delete border;
-    border = NULL;
+    SAFE_DELETE(fac);
+    SAFE_DELETE(button);
+    SAFE_DELETE(border);
 
     //生成器模式
     Director* director = new Director();
@@ -47,30 +47,23 @@ int main()
     Product* p2 = b2->getResult();
     p1->output();
     p2->output();
-    delete director;
-    director = NULL;
-    delete b1;
-    b1 = NULL;
-    delete b2;
-    b2 = NULL;
+    SAFE_DELETE(director);
+    SAFE_DELETE(b1);
+    SAFE_DELETE(b2);
 
     //工厂方法模式
     RadioFactory* pMac = new MacRadioFactory();
     pMac->CreateRadio();
     RadioFactory* pWin = new WinRadioFactory();
     pWin->CreateRadio();
-    delete pMac;
-    pMac = NULL;
-    delete pWin;
-    pWin = NULL;
+    SAFE_DELETE(pMac);
+    SAFE_DELETE(pWin);
 
     //原型模式
     Prototype* pTypeA = new ConcretePrototype();
     Prototype* pTypeB = pTypeA->clone();
-    delete pTypeA;
-    pTypeA = NULL;
-    delete pTypeB;
-    pTypeB = NULL;
+    SAFE_DELETE(pTypeA);
+    SAFE_DELETE(pTypeB);
 
     //单例模式
     Singleton* pInstance = Singleton::Instance();
@@ -83,10 +76,8 @@ int main()
     pAdapter->Request();
     Adapter1* pAdapter1 = new Adapter1();
     pAdapter1->Request();
-    delete pAdapter;
-    pAdapter = NULL;
-    delete pAdapter1;
-    pAdapter1 = NULL;
+    SAFE_DELETE(pAdapter);
+    SAFE_DELETE(pAdapter1);
 
     //桥接模式
     DrawingAPI* pDraw1 = new DrawingCircle();
@@ -95,14 +86,10 @@ int main()
     Shape* pShape2 = new TriangleShape(pDraw2);
     pShape1->drawShape();
     pShape2->drawShape();
-    delete pDraw1;
-    pDraw1 = NULL;
-    delete pDraw2;
-    pDraw2 = NULL;
-    delete pShape1;
-    pShape1 = NULL;
-    delete pShape2;
-    pShape2 = NULL;
+    SAFE_DELETE(pDraw1);
+    SAFE_DELETE(pDraw2);
+    SAFE_DELETE(pShape1);
+    SAFE_DELETE(pShape2);
 
     //组合模式
     Component* pLeaf1 = new Leaf();
@@ -117,32 +104,24 @@ int main()
     pComposite->Operation();
     Component* pLeaf = pComposite->GetChild(0);
     pLeaf->Operation();
-    delete pLeaf1;
-    pLeaf1 = NULL;
-    delete pLeaf2;
-    pLeaf2 = NULL;
-    delete pComposite;
-    pComposite = NULL;
+    SAFE_DELETE(pLeaf1);
+    SAFE_DELETE(pLeaf2);
+    SAFE_DELETE(pComposite);
 
     //装饰模式
     Widget* aWidget = new BorderDecorator(new BorderDecorator(new ScrollDecorator(new TextField(80, 24))));
     aWidget->draw();
-    delete aWidget;
-    aWidget = NULL;
+    SAFE_DELETE(aWidget);
 
     //外观模式
     CPU* pCpu = new CPU();
     Memory* pMemory = new Memory();
     HardDrive* pHardDrive = new HardDrive();
     Computer* pComputer = new Computer(pCpu, pMemory, pHardDrive);
-    delete pCpu;
-    pCpu = NULL;
-    delete pMemory;
-    pMemory = NULL;
-    delete pHardDrive;
-    pHardDrive = NULL;
-    delete pComputer;
-    pComputer = NULL;
+    SAFE_DELETE(pCpu);
+    SAFE_DELETE(pMemory);
+    SAFE_DELETE(pHardDrive);
+    SAFE_DELETE(pComputer);
 
     //享元模式
     //外部状态extrinsicState
@@ -161,8 +140,7 @@ int main()
     //代理模式
     CSubject *pSubject = new CProxy();
 	pSubject->Request();
-	delete pSubject;
-	pSubject = NULL;
+	SAFE_DELETE(pSubject);
 
 	//责任链模式
     Manager *general = new GeneralManager(NULL, "A"); //设置上级，总经理没有上级
@@ -171,12 +149,28 @@ int main()
     common->DealWithRequest("D",300);   //员工D要求加薪
     common->DealWithRequest("E", 600);
     common->DealWithRequest("F", 1000);
-    delete common;
-    common = NULL;
-    delete majordomo;
-    majordomo = NULL;
-    delete general;
-    general = NULL;
+    SAFE_DELETE(common);
+    SAFE_DELETE(majordomo);
+    SAFE_DELETE(general);
+
+    //命令模式
+    //生成烤肉师傅、服务员、订单对象
+    Barbecuer *p_cook = new Barbecuer();
+    Command *p_mutton = new BakeMuttonCommand(p_cook);
+    Command *p_chickenwing = new BakeChickenWingCommand(p_cook);
+    Waiter *p_waiter = new Waiter();
+
+    //将订单对象推送到命令队列
+    p_waiter->SetOrder(p_mutton);
+    p_waiter->SetOrder(p_chickenwing);
+
+    //服务员通知烤肉师傅具体订单
+    p_waiter->Notify();
+
+    SAFE_DELETE(p_cook);
+    SAFE_DELETE(p_mutton);
+    SAFE_DELETE(p_chickenwing);
+    SAFE_DELETE(p_waiter);
 
     system("pause");
     return 0;

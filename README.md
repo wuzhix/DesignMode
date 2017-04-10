@@ -12,3 +12,4 @@
 * [享元模式](/src/Flyweight.h)
 * [代理模式](/src/Proxy.h)
 * [责任链模式](/src/ChainOfResponsibility.h)
+* [命令模式](/src/Command.h)
