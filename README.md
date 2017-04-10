@@ -11,3 +11,4 @@
 * [外观模式](/src/Facade.h)
 * [享元模式](/src/Flyweight.h)
 * [代理模式](/src/Proxy.h)
+* [责任链模式](/src/ChainOfResponsibility.h)
