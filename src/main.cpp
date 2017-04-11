@@ -13,6 +13,7 @@
 #include "Proxy.h"
 #include "ChainOfResponsibility.h"
 #include "Command.h"
+#include "Interpreter.h"
 
 #define SAFE_DELETE(p) if (p) {delete p;p = NULL;}
 
@@ -159,18 +160,26 @@ int main()
     Command *p_mutton = new BakeMuttonCommand(p_cook);
     Command *p_chickenwing = new BakeChickenWingCommand(p_cook);
     Waiter *p_waiter = new Waiter();
-
     //将订单对象推送到命令队列
     p_waiter->SetOrder(p_mutton);
     p_waiter->SetOrder(p_chickenwing);
-
     //服务员通知烤肉师傅具体订单
     p_waiter->Notify();
-
     SAFE_DELETE(p_cook);
     SAFE_DELETE(p_mutton);
     SAFE_DELETE(p_chickenwing);
     SAFE_DELETE(p_waiter);
+
+    //解释器模式
+    cout<<"Interpreter test!"<<endl;
+    Context *context = new Context();
+    AbstractExpression *t = new TerminalExpression();
+    AbstractExpression *n = new NonterminalExpression();
+    t->interpret(context);
+    n->interpret(context);
+    SAFE_DELETE(context);
+    SAFE_DELETE(t);
+    SAFE_DELETE(n);
 
     system("pause");
     return 0;
