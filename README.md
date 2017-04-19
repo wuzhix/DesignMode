@@ -14,3 +14,4 @@
 * [责任链模式](/src/ChainOfResponsibility.h)
 * [命令模式](/src/Command.h)
 * [解释器模式](/src/Interpreter.h)
+* [迭代器模式](/src/Iterator.h)
