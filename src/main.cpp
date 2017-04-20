@@ -15,6 +15,7 @@
 #include "Command.h"
 #include "Interpreter.h"
 #include "Iterator.h"
+#include "Mediator.h"
 
 #define SAFE_DELETE(p) if (p) {delete p;p = NULL;}
 
@@ -203,6 +204,20 @@ int main()
         }
     }
     SAFE_DELETE(pName);
+
+    //中介者模式
+    Mediator* mediator = new HouseMediator();
+    Person *person1 = new Renter();
+    Person *person2 = new Landlord();
+    mediator->SetRenter(person1);
+    mediator->SetLandlord(person2);
+    person1->SetMediator(mediator);
+    person2->SetMediator(mediator);
+    person1->SendMessage(string("我想在深圳北站附近租套房子，一室一厅\n"));
+    person2->SendMessage(string("我出租一条房子，一室一厅，深圳北站附近\n"));
+    SAFE_DELETE(person1);
+    SAFE_DELETE(person2)
+    SAFE_DELETE(mediator);
 
     system("pause");
     return 0;
