@@ -16,6 +16,7 @@
 #include "Interpreter.h"
 #include "Iterator.h"
 #include "Mediator.h"
+#include "Memento.h"
 
 #define SAFE_DELETE(p) if (p) {delete p;p = NULL;}
 
@@ -218,6 +219,16 @@ int main()
     SAFE_DELETE(person1);
     SAFE_DELETE(person2)
     SAFE_DELETE(mediator);
+
+    //备忘录模式
+    Caretake caretake;
+	GameRole role;
+	role.Show();   //初始值
+	caretake.Save(role.Save()); //保存状态
+	role.Attack();
+	role.Show();  //进攻后
+	role.Load(caretake.Load(0)); //载入状态
+	role.Show();  //恢复到状态0
 
     system("pause");
     return 0;
