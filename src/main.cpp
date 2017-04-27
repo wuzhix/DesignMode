@@ -1,4 +1,5 @@
 #include<iostream>
+#include<string>
 #include "AbstractFactory.h"
 #include "Builder.h"
 #include "FactoryMethod.h"
@@ -17,8 +18,11 @@
 #include "Iterator.h"
 #include "Mediator.h"
 #include "Memento.h"
+#include "Observer.h"
 
 #define SAFE_DELETE(p) if (p) {delete p;p = NULL;}
+
+using namespace std;
 
 int main()
 {
@@ -229,6 +233,23 @@ int main()
 	role.Show();  //进攻后
 	role.Load(caretake.Load(0)); //载入状态
 	role.Show();  //恢复到状态0
+
+	//观察者模式
+	Secretary* pSecretary = new Secretary();
+    // 观察者
+    StockObserver* s1 = new StockObserver("Lazy", pSecretary);
+    StockObserver* s2 = new StockObserver("SnowFire", pSecretary);
+    // 加入通知队列
+    pSecretary->Add(s1);
+    pSecretary->Add(s2);
+    // 通知
+    pSecretary->Notify();
+    // 动态删除
+    pSecretary->Remove(0);
+    pSecretary->Notify();
+    SAFE_DELETE(pSecretary);
+    SAFE_DELETE(s1);
+    SAFE_DELETE(s2);
 
     system("pause");
     return 0;

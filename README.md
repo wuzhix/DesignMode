@@ -17,3 +17,4 @@
 * [迭代器模式](/src/Iterator.h)
 * [中介者模式](/src/Mediator.h)
 * [备忘录模式](/src/Memento.h)
+* [观察者模式](/src/Observer.h)
