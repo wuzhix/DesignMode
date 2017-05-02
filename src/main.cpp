@@ -19,6 +19,7 @@
 #include "Mediator.h"
 #include "Memento.h"
 #include "Observer.h"
+#include "State.h"
 
 #define SAFE_DELETE(p) if (p) {delete p;p = NULL;}
 
@@ -250,6 +251,17 @@ int main()
     SAFE_DELETE(pSecretary);
     SAFE_DELETE(s1);
     SAFE_DELETE(s2);
+    
+    //״̬ģʽ
+    State* pStateA = new ConcreteStateA();
+    State* pStateB = new ConcreteStateB();
+    Role* pRole = new Role(pStateA);
+    pRole->Request();
+    pRole->ChangeState(pStateB);
+    pRole->Request();
+    SAFE_DELETE(pStateA);
+    SAFE_DELETE(pStateB);
+    SAFE_DELETE(pRole);
 
     system("pause");
     return 0;
