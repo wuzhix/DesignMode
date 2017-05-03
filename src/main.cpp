@@ -21,6 +21,7 @@
 #include "Observer.h"
 #include "State.h"
 #include "Strategy.h"
+#include "TemplateMethod.h" 
 
 #define SAFE_DELETE(p) if (p) {delete p;p = NULL;}
 
@@ -278,7 +279,14 @@ int main()
     contextA.execute();
     contextA.set_strategy(&concreteStrategyC);
     contextA.execute();
- 
+    
+    //模板方法模式
+    AbstractClass *pAbstractA = new ConcreteClassA;
+    pAbstractA->TemplateMethod();
+    AbstractClass *pAbstractB = new ConcreteClassB;
+    pAbstractB->TemplateMethod();
+    SAFE_DELETE(pAbstractA);
+    SAFE_DELETE(pAbstractB);
 
     system("pause");
     return 0;

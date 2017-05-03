@@ -20,3 +20,4 @@
 * [观察者模式](/src/Observer.h)
 * [状态模式](/src/State.h)
 * [策略模式](/src/Strategy.h)
+* [模板方法模式](/src/TemplateMethod.h)
