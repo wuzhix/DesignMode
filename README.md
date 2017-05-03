@@ -21,3 +21,4 @@
 * [状态模式](/src/State.h)
 * [策略模式](/src/Strategy.h)
 * [模板方法模式](/src/TemplateMethod.h)
+* [访问者模式](/src/Visitor.h)

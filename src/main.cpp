@@ -22,6 +22,7 @@
 #include "State.h"
 #include "Strategy.h"
 #include "TemplateMethod.h" 
+#include "Visitor.h"
 
 #define SAFE_DELETE(p) if (p) {delete p;p = NULL;}
 
@@ -287,6 +288,21 @@ int main()
     pAbstractB->TemplateMethod();
     SAFE_DELETE(pAbstractA);
     SAFE_DELETE(pAbstractB);
+    
+    //访问者模式
+    Employees *e = new Employees();  
+    e->Attach( new Employee( "Tom", 25000.0, 14 ) );  
+    e->Attach( new Employee( "Thomas", 35000.0, 16 ) );  
+    e->Attach( new Employee( "Roy", 45000.0, 21 ) );  
+    // Create two visitors  
+    IncomeVisitor *v1 = new IncomeVisitor();  
+    VacationVisitor *v2 = new VacationVisitor();  
+    // Employees are visited  
+    e->Accept( v1 );  
+    e->Accept( v2 );  
+    SAFE_DELETE(e);
+    SAFE_DELETE(v1);
+    SAFE_DELETE(v2);
 
     system("pause");
     return 0;
