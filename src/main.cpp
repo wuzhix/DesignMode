@@ -20,6 +20,7 @@
 #include "Memento.h"
 #include "Observer.h"
 #include "State.h"
+#include "Strategy.h"
 
 #define SAFE_DELETE(p) if (p) {delete p;p = NULL;}
 
@@ -262,6 +263,22 @@ int main()
     SAFE_DELETE(pStateA);
     SAFE_DELETE(pStateB);
     SAFE_DELETE(pRole);
+    
+    //²ßÂÔÄ£Ê½
+    ConcreteStrategyA concreteStrategyA;
+    ConcreteStrategyB concreteStrategyB;
+    ConcreteStrategyC concreteStrategyC;
+    Strategy contextA(&concreteStrategyA);
+    Strategy contextB(&concreteStrategyB);
+    Strategy contextC(&concreteStrategyC);
+    contextA.execute();
+    contextB.execute();
+    contextC.execute();
+    contextA.set_strategy(&concreteStrategyB);
+    contextA.execute();
+    contextA.set_strategy(&concreteStrategyC);
+    contextA.execute();
+ 
 
     system("pause");
     return 0;
